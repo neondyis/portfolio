@@ -6,18 +6,15 @@ import {
     Center,
     Container,
     Flex,
-    Divider, IconButton, Link,
     Text
 } from "@chakra-ui/react";
-import {ArrowForwardIcon, ArrowRightIcon, Icon, PhoneIcon} from "@chakra-ui/icons";
+import {ArrowForwardIcon, Icon} from "@chakra-ui/icons";
 import {BsGithub} from "react-icons/bs";
 import {RiLinkedinFill} from "react-icons/ri"
-import {MdLightMode, MdDarkMode} from "react-icons/md";
-
-const inter = Inter({subsets: ['latin']})
+import Link from 'next/link';
 
 export default function Home() {
-    const intro = 'Hello I\'m Kyle Cunnison';
+    const intro = 'Hello I\'m Kyle';
     return (
         <>
             <Head>
@@ -26,7 +23,7 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <main>
+            <div>
                 <Center>
                     <Container >
                         <Text className={'glitch'} fontWeight="bold" fontSize="3rem" width='fit-content' textColor='#33272a' data-text={intro}>
@@ -39,22 +36,24 @@ export default function Home() {
                         <br/>
                         <Text fontSize="1rem">
                             Working with my hands to make magic happen on the internet. View my
-                            <Button size='sm' variant='intro'>  About </Button>,
-                            <Button size='sm'  variant='intro'> Projects </Button> ,
-                            <Button size='sm'  variant='intro'> Resume </Button> or send me an email at
-                            <Button size='sm'  variant='intro'> cunnisonkyle@gmail.com </Button>.
+                            <Link href='/projects'> <Button size='sm' variant='intro'> Projects </Button></Link>,
+                            <Link href='/resume'> <Button size='sm' variant='intro'> Resume </Button></Link>,
+                            <Button size='sm' variant='intro'>  About </Button>.
+                        </Text>
+                        <Text>
+                            You can send me an email at <Button size='sm' variant='intro'> cunnisonkyle@gmail.com </Button>.
                         </Text>
                         <br/>
                         <Text fontSize="1rem">
                             See more about me <ArrowForwardIcon className='bounce-icon-right'/>
                         </Text>
                         <Flex gap={3} alignItems='center'>
-                            <Link href='https://www.linkedin.com/in/kyle-cunnison-995296132/' isExternal><Icon as={RiLinkedinFill} boxSize={6}></Icon></Link>
-                             <Link href='https://github.com/neondyis' isExternal><Icon as={BsGithub} boxSize={6}/></Link>
+                            <Link href='https://www.linkedin.com/in/kyle-cunnison-995296132/' rel="noopener noreferrer" target="_blank"><Icon as={RiLinkedinFill} boxSize={6}></Icon></Link>
+                            <Link href='https://github.com/neondyis' rel="noopener noreferrer" target="_blank"><Icon as={BsGithub} boxSize={6}/></Link>
                         </Flex>
                     </Container>
                 </Center>
-            </main>
+            </div>
         </>
     )
 }

@@ -2,6 +2,7 @@ import Header from './Header';
 import { SwitchTransition, Transition } from 'react-transition-group';
 import gsap from 'gsap';
 import { useRouter } from 'next/router';
+import Footer from "@/components/Footer";
 
 function Layout ({ children }:any)  {
     const router = useRouter();
@@ -55,6 +56,8 @@ function Layout ({ children }:any)  {
             <main className='p-4 mx-auto max-w-4xl'>{children}</main>
                 </Transition>
             </SwitchTransition>
+            {router.route !== '/' && <Footer/>}
+
         </>
     )
 }
