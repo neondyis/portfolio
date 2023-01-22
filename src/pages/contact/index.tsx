@@ -1,4 +1,4 @@
-import {Center, Container, Flex, Input, Text, Textarea} from "@chakra-ui/react";
+import {Button, Center, Container, Flex, Input, Text, Textarea} from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -24,6 +24,8 @@ export default function Contact() {
                                   size='md'
                                   onChange={handleInputChange} placeholder='Message' />
                     </Flex>
+                    <br/>
+                    <Button>Submit</Button>
                 </Container>
             </Center>
         </>

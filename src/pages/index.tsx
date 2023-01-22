@@ -38,7 +38,7 @@ export default function Home() {
                             Working with my hands to make magic happen on the internet. View my
                             <Link href='/projects'> <Button size='sm' variant='intro'> Projects </Button></Link>,
                             <Link href='/resume'> <Button size='sm' variant='intro'> Resume </Button></Link>,
-                            <Button size='sm' variant='intro'>  About </Button>.
+                            <Link href='/about'><Button size='sm' variant='intro'>  About </Button></Link>.
                         </Text>
                         <Text>
                             You can send me an email at <Button size='sm' variant='intro'> cunnisonkyle@gmail.com </Button>.
