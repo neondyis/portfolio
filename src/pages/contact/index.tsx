@@ -1,12 +1,27 @@
-import {Button, Center, Container, Flex, FormControl, FormLabel, Input, Text, Textarea} from "@chakra-ui/react";
+import {
+    Button,
+    Center,
+    Container,
+    createStandaloneToast,
+    Flex,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Input,
+    Text,
+    Textarea
+} from "@chakra-ui/react";
 import emailjs from '@emailjs/browser';
 import {ChangeEvent, useRef, useState} from "react";
+import Link from "next/link";
+import { useToast } from '@chakra-ui/react'
 
 export default function Contact() {
     const [message, setMessage] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const form = useRef();
+    const { ToastContainer, toast } = createStandaloneToast()
 
 
     let handleInputChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>, type: string) => {
@@ -24,19 +39,36 @@ export default function Contact() {
         }
     }
 
-    const sendEmail = () => {
+    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         // @ts-ignore
         emailjs.sendForm('service_v9fe1zp', 'template_l2b5a9p', form.current, 'cH9eptZm4IEH6YDjm')
             .then((result) => {
-                console.log(result.text);
+                toast({
+                    position: 'bottom-right',
+                    title: 'Message Sent.',
+                    description: "Your message has been successfully delivered. I will respond in 1-2 days.",
+                    status: 'success',
+                    duration: 9000,
+                    isClosable: true,
+                })
             }, (error) => {
-                console.log(error.text);
+                toast({
+                    position: 'bottom-left',
+                    title: 'Message not sent.',
+                    description: "Your message has been not delivered due to an error. Please try to contact me directly by email.",
+                    status: 'error',
+                    duration: 9000,
+                    isClosable: true,
+                })
             });
+        setMessage('');
+        setName('');
+        setEmail('');
     }
 
-    const isNameInvalid = () => {
-        return name !== '';
-    }
+    const isNameInvalid = name === '';
+    const isEmailInvalid = email === '';
 
 
     return(
@@ -44,17 +76,21 @@ export default function Contact() {
             <Center>
                 <Container>
                     <Text className={'glitch'}  fontWeight="bold" fontSize="3rem" data-text={'Contact'} width='fit-content' textColor='#33272a'> Contact.</Text>
-                    <Text>Get in touch or shoot me an email directly on </Text><Text fontWeight="bold">cunnisonkyle@gmail.com</Text>
+                    <Text>Get in touch or shoot me an email directly on </Text><Link href='/contact'><Button size='sm' variant='intro'> cunnisonkyle@gmail.com </Button></Link>.
                     {/*// @ts-ignore*/}
-                    <form ref={form}>
-                        <Flex flexDirection='column' gap={10} paddingTop='20px'>
-                            <FormControl>
+                    <form ref={form} onSubmit={sendEmail}>
+                        <Flex flexDirection='column' gap={10} paddingTop='20px' >
+                            <FormControl isInvalid={isNameInvalid} isRequired>
                                 <Input placeholder='Name'  name="name" value={name} onChange={e => handleInputChange(e,'name')} />
-                                {/*<FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                                {isNameInvalid && (
+                                    <FormErrorMessage>Name is required.</FormErrorMessage>
+                                )}
                             </FormControl>
-                            <FormControl>
-                                <Input placeholder='Email' name="email"  value={email} onChange={e => handleInputChange(e,'email')} />
-                                {/*<FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
+                            <FormControl isInvalid={isEmailInvalid} isRequired>
+                                <Input placeholder='Email' name="email" type='email' pattern={'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)'} value={email} onChange={e => handleInputChange(e,'email')} />
+                                {isEmailInvalid && (
+                                    <FormErrorMessage>Email is required.</FormErrorMessage>
+                                )}
                             </FormControl>
                             <FormControl>
                                 <Textarea
@@ -63,14 +99,14 @@ export default function Contact() {
                                     h='250px'
                                     size='md'
                                     onChange={e => handleInputChange(e,'message')} placeholder='Message' />
-                                {/*<FormErrorMessage>{form.errors.name}</FormErrorMessage>*/}
                             </FormControl>
                         </Flex>
                         <br/>
-                        <Button onClick={sendEmail}>Submit</Button>
+                        <Button type='submit' bgColor='honeydew' color='gray.600' isDisabled={isNameInvalid || isEmailInvalid}>Send</Button>
                     </form>
                 </Container>
             </Center>
+            <ToastContainer />
         </>
     )
 }

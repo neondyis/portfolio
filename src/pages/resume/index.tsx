@@ -1,12 +1,14 @@
 import {Center, Container, Text} from "@chakra-ui/react";
-import Footer from "@/components/Footer";
 import {useState} from "react";
 import {pdfjs, Document, Page} from 'react-pdf'
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 export default function Resume() {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
+
+
 
     // @ts-ignore
     function onDocumentLoadSuccess({ numPages }) {

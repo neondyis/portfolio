@@ -41,7 +41,7 @@ export default function Home() {
                             <Link href='/about'><Button size='sm' variant='intro'>  About </Button></Link>.
                         </Text>
                         <Text>
-                            You can send me an email at <Button size='sm' variant='intro'> cunnisonkyle@gmail.com </Button>.
+                            You can send me an email at <Link href='/contact'><Button size='sm' variant='intro'> cunnisonkyle@gmail.com </Button></Link>.
                         </Text>
                         <br/>
                         <Text fontSize="1rem">

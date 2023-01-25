@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ProjectCard({name,description,categories,imgUrl,projectLink=''}: ProjectCardProp) {
     return (
         <Link href={projectLink} rel="noopener noreferrer" target="_blank">
-            <Card h={'300px'} flexDirection='column-reverse' backgroundImage={`linear-gradient(rgba(0, 0, 0, 0.1) 10%, rgba(0, 0, 0, 0.78) 80%),url(${imgUrl})`} backgroundRepeat={'no-repeat'} backgroundPosition={"center"}>
+            <Card h={'300px'} maxW={'300px'} flexDirection='column-reverse' backgroundImage={`linear-gradient(rgba(0, 0, 0, 0.1) 10%, rgba(0, 0, 0, 0.78) 80%),url(${imgUrl})`} backgroundRepeat={'no-repeat'} backgroundPosition={"center"}>
             <CardBody h={'100%'}>
                 <Text color='#ffffff'  fontWeight="bold" fontSize="2rem">{name}</Text>
                 <Text color='#ffffff' fontSize="sm" fontFamily="Blorado, sans-serif">{description}</Text>
