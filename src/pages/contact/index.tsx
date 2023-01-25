@@ -38,13 +38,15 @@ export default function Contact() {
         return name !== '';
     }
 
+
     return(
         <>
             <Center>
                 <Container>
                     <Text className={'glitch'}  fontWeight="bold" fontSize="3rem" data-text={'Contact'} width='fit-content' textColor='#33272a'> Contact.</Text>
                     <Text>Get in touch or shoot me an email directly on </Text><Text fontWeight="bold">cunnisonkyle@gmail.com</Text>
-                    <form  ref={form.current}>
+                    {/*// @ts-ignore*/}
+                    <form ref={form}>
                         <Flex flexDirection='column' gap={10} paddingTop='20px'>
                             <FormControl>
                                 <Input placeholder='Name'  name="name" value={name} onChange={e => handleInputChange(e,'name')} />
